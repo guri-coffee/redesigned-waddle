@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クリエイターポートフォリオ | Your Name</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* 基本スタイルの設定 */
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #0D0C1D; /* ディープネイビー */
+            color: #E5E7EB;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+        }
+        
+        /* アクセントカラー (サイバーシアン) */
+        .accent-color { color: #00FFFF; }
+        .bg-accent { background-color: #00FFFF; }
+        .border-accent { border-color: #00FFFF; }
+        .hover\:bg-accent-dark:hover { background-color: #00E0E0; }
+        .hover\:text-accent:hover { color: #80FFFF; }
+
+        /* グローエフェクト */
+        .glow {
+            transition: all 0.3s ease-in-out;
+        }
+        .glow:hover {
+            box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF;
+        }
+        .text-glow:hover {
+            text-shadow: 0 0 8px #00FFFF;
+        }
+
+        .section-title {
+            @apply text-4xl font-bold text-center mb-12 relative accent-color;
+        }
+        .section-title::after {
+            content: '';
+            @apply block w-20 h-1 bg-accent mx-auto mt-4 rounded-full;
+            box-shadow: 0 0 10px #00FFFF;
+        }
+        
+        /* スクロールアニメーション */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* グリッチエフェクト */
+        .glitch {
+            position: relative;
+        }
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0D0C1D;
+            overflow: hidden;
+        }
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 #FF00FF;
+            animation: glitch-anim-1 2s infinite linear reverse;
+        }
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 #00FFFF, 2px 2px #FF00FF;
+            animation: glitch-anim-2 2s infinite linear reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% { clip-path: inset(5% 0 90% 0); }
+            10% { clip-path: inset(70% 0 10% 0); }
+            20% { clip-path: inset(95% 0 2% 0); }
+            30% { clip-path: inset(30% 0 50% 0); }
+            40% { clip-path: inset(10% 0 88% 0); }
+            50% { clip-path: inset(60% 0 30% 0); }
+            60% { clip-path: inset(80% 0 5% 0); }
+            70% { clip-path: inset(25% 0 70% 0); }
+            80% { clip-path: inset(55% 0 33% 0); }
+            90% { clip-path: inset(90% 0 4% 0); }
+            100% { clip-path: inset(40% 0 45% 0); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip-path: inset(80% 0 5% 0); }
+            10% { clip-path: inset(10% 0 85% 0); }
+            20% { clip-path: inset(75% 0 5% 0); }
+            30% { clip-path: inset(40% 0 40% 0); }
+            40% { clip-path: inset(85% 0 10% 0); }
+            50% { clip-path: inset(20% 0 75% 0); }
+            60% { clip-path: inset(60% 0 30% 0); }
+            70% { clip-path: inset(90% 0 4% 0); }
+            80% { clip-path: inset(35% 0 55% 0); }
+            90% { clip-path: inset(70% 0 20% 0); }
+            100% { clip-path: inset(10% 0 88% 0); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- ヘッダー -->
+    <header class="bg-black/30 backdrop-blur-md fixed top-0 left-0 right-0 z-50 border-b border-cyan-500/20" id="header">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-display font-bold text-white text-glow">YOUR NAME</a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#about" class="text-gray-300 hover:text-accent transition-colors text-glow">About</a>
+                <a href="#works" class="text-gray-300 hover:text-accent transition-colors text-glow">Works</a>
+                <a href="#skills" class="text-gray-300 hover:text-accent transition-colors text-glow">Skills</a>
+                <a href="#contact" class="bg-accent hover:bg-accent-dark text-black font-bold py-2 px-5 rounded-md transition-colors glow">Contact</a>
+            </nav>
+            <button class="md:hidden text-white" id="mobile-menu-button">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+        </div>
+        <!-- モバイルメニュー -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black/80">
+            <a href="#about" class="block py-3 px-6 text-gray-300 hover:bg-cyan-500/20">About</a>
+            <a href="#works" class="block py-3 px-6 text-gray-300 hover:bg-cyan-500/20">Works</a>
+            <a href="#skills" class="block py-3 px-6 text-gray-300 hover:bg-cyan-500/20">Skills</a>
+            <a href="#contact" class="block py-3 px-6 text-gray-300 hover:bg-cyan-500/20">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- ヒーローセクション -->
+        <section class="h-screen flex items-center justify-center text-center relative overflow-hidden">
+            <div id="particles-js" class="absolute inset-0 z-0"></div>
+            <div class="relative z-20 px-4">
+                <h1 class="glitch text-5xl md:text-7xl font-display font-bold text-white leading-tight mb-4" data-text="言葉と音、デザインで、世界を紡ぐ。">言葉と音、デザインで、世界を紡ぐ。</h1>
+                <p class="text-xl md:text-2xl text-gray-300 mt-6">Webライティング・AI音楽・デザインの力で、あなたの想いを形にします。</p>
+            </div>
+        </section>
+
+        <!-- アバウトセクション -->
+        <section id="about" class="py-24 bg-black/20 backdrop-blur-sm">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title fade-in">About Me</h2>
+                <div class="flex flex-col md:flex-row items-center gap-12 fade-in">
+                    <div class="md:w-1/3">
+                        <div class="relative w-64 h-64 mx-auto">
+                            <div class="absolute inset-0 border-2 border-accent rounded-full animate-spin" style="animation-duration: 10s;"></div>
+                            <div class="absolute inset-2 border-2 border-accent/50 rounded-full animate-ping"></div>
+                            <img src="https://placehold.co/400x400/0D0C1D/00FFFF?text=YN" alt="プロフィール画像" class="rounded-full shadow-lg w-full h-full object-cover relative z-10">
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-3xl font-bold mb-2">Akihiro Nishita</h3>
+                        <p class="accent-color font-semibold mb-4 text-lg">Content Creator / Web Designer</p>
+                        <p class="text-gray-400 leading-relaxed">
+                            石川を拠点に活動するクリエイター。読者の心に届くライティング、AIを活用した新しい音楽体験、そしてユーザーを魅了するWebデザインを掛け合わせ、唯一無二の価値を提供します。<br>
+                            お客様のビジョンを深く理解し、その実現を力強くサポートします。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ワークスセクション -->
+        <section id="works" class="py-24">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title fade-in">My Works</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 作品 -->
+                    <div class="work-item group relative overflow-hidden rounded-lg border border-cyan-500/30 fade-in glow" style="transition-delay: 0ms;">
+                        <img src="https://placehold.co/600x400/1a1a2e/e0e0e0?text=Writing" alt="Webライティング実績" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="text-center p-4">
+                                <h3 class="text-xl font-bold accent-color">ブログ記事・Webライティング</h3>
+                                <p class="text-sm text-gray-300">SEOコンテンツ / コラム記事</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work-item group relative overflow-hidden rounded-lg border border-cyan-500/30 fade-in glow" style="transition-delay: 100ms;">
+                        <img src="https://placehold.co/600x400/16213e/e0e0e0?text=AI+Music" alt="AI音楽実績" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="text-center p-4">
+                                <h3 class="text-xl font-bold accent-color">AI生成楽曲</h3>
+                                <p class="text-sm text-gray-300">BGM / サウンドロゴ</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work-item group relative overflow-hidden rounded-lg border border-cyan-500/30 fade-in glow" style="transition-delay: 200ms;">
+                        <img src="https://placehold.co/600x400/0f3460/e0e0e0?text=Web+Design" alt="Webデザイン実績" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="text-center p-4">
+                                <h3 class="text-xl font-bold accent-color">Webサイトデザイン</h3>
+                                <p class="text-sm text-gray-300">ポートフォリオサイト / LP</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- スキルセクション -->
+        <section id="skills" class="py-24 bg-black/20 backdrop-blur-sm">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title fade-in">Skills</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <!-- スキルカード -->
+                    <div class="skill-card bg-black/30 p-6 rounded-lg border border-cyan-500/30 hover:-translate-y-2 transition-all duration-300 fade-in glow" style="transition-delay: 0ms;">
+                        <i class="fas fa-pen-alt text-5xl accent-color mb-4"></i>
+                        <h3 class="text-xl font-bold">Webライティング</h3>
+                    </div>
+                    <div class="skill-card bg-black/30 p-6 rounded-lg border border-cyan-500/30 hover:-translate-y-2 transition-all duration-300 fade-in glow" style="transition-delay: 100ms;">
+                        <i class="fas fa-blog text-5xl accent-color mb-4"></i>
+                        <h3 class="text-xl font-bold">ブログ運営</h3>
+                    </div>
+                    <div class="skill-card bg-black/30 p-6 rounded-lg border border-cyan-500/30 hover:-translate-y-2 transition-all duration-300 fade-in glow" style="transition-delay: 200ms;">
+                        <i class="fas fa-robot text-5xl accent-color mb-4"></i>
+                        <h3 class="text-xl font-bold">AI楽曲制作</h3>
+                    </div>
+                    <div class="skill-card bg-black/30 p-6 rounded-lg border border-cyan-500/30 hover:-translate-y-2 transition-all duration-300 fade-in glow" style="transition-delay: 300ms;">
+                        <i class="fas fa-palette text-5xl accent-color mb-4"></i>
+                        <h3 class="text-xl font-bold">Webデザイン</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- コンタクトセクション -->
+        <section id="contact" class="py-24">
+            <div class="container mx-auto px-6 max-w-3xl text-center">
+                <h2 class="section-title fade-in">Contact</h2>
+                <p class="text-gray-400 mb-8 fade-in">ご依頼・ご相談など、お気軽にお問い合わせください。</p>
+                <form id="contact-form" class="fade-in">
+                    <div class="flex flex-col md:flex-row gap-6 mb-6">
+                        <input type="text" id="name" name="name" placeholder="お名前" class="w-full bg-black/30 border-2 border-cyan-500/30 rounded-md py-3 px-4 text-white focus:outline-none focus:border-accent transition-colors" required>
+                        <input type="email" id="email" name="email" placeholder="メールアドレス" class="w-full bg-black/30 border-2 border-cyan-500/30 rounded-md py-3 px-4 text-white focus:outline-none focus:border-accent transition-colors" required>
+                    </div>
+                    <textarea id="message" name="message" rows="5" placeholder="メッセージ" class="w-full bg-black/30 border-2 border-cyan-500/30 rounded-md py-3 px-4 text-white focus:outline-none focus:border-accent transition-colors mb-6" required></textarea>
+                    <button type="submit" class="bg-accent hover:bg-accent-dark text-black font-bold py-3 px-8 rounded-md transition-colors text-lg glow">送信する</button>
+                </form>
+                <p id="form-message" class="mt-4 text-green-400"></p>
+            </div>
+        </section>
+    </main>
+
+    <!-- フッター -->
+    <footer class="border-t border-cyan-500/20">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="#" class="hover:text-accent transition-colors text-glow"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="#" class="hover:text-accent transition-colors text-glow"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" class="hover:text-accent transition-colors text-glow"><i class="fab fa-github fa-lg"></i></a>
+                <a href="#" class="hover:text-accent transition-colors text-glow"><i class="fab fa-linkedin fa-lg"></i></a>
+            </div>
+            <p>&copy; 2025 Your Name. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- particles.jsライブラリ -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+    // --- モバイルメニューのトグル ---
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+    });
+
+    // --- ヘッダーのスクロールエフェクト ---
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('bg-black/80');
+        } else {
+            header.classList.remove('bg-black/80');
+        }
+    });
+
+    // --- スクロールに応じたフェードインアニメーション ---
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -80px 0px" };
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, appearOptions);
+    faders.forEach(fader => appearOnScroll.observe(fader));
+
+    // --- フォーム送信のダミー処理 ---
+    const contactForm = document.getElementById('contact-form');
+    const formMessage = document.getElementById('form-message');
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        formMessage.textContent = '>>> Message Sent. Thank you.';
+        contactForm.reset();
+        setTimeout(() => { formMessage.textContent = ''; }, 5000);
+    });
+
+    // --- particles.jsの初期化 ---
+    particlesJS('particles-js', {
+        "particles": {
+            "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+            "color": { "value": "#00ffff" },
+            "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" } },
+            "opacity": { "value": 0.5, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
+            "size": { "value": 2, "random": true, "anim": { "enable": false } },
+            "line_linked": { "enable": true, "distance": 150, "color": "#00ffff", "opacity": 0.4, "width": 1 },
+            "move": { "enable": true, "speed": 2, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+            "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } }, "push": { "particles_nb": 4 } }
+        },
+        "retina_detect": true
+    });
+    </script>
+</body>
+</html>
